@@ -29,8 +29,8 @@ public class Day3 {
         return mul;
     }
 
-    public static long part2(String input) {
-        long result = 0L;
+    public static int part2(String input) {
+        int result = 0;
 
         boolean instructions = true;
         Pattern mulRegex = Pattern.compile("(mul\\(\\d+,\\d+\\))|((don't|do).*?mul\\(\\d+,\\d+\\))");

@@ -13,22 +13,19 @@ public class Day4 {
         return i >= 0 && i < N && j >= 0 && j < N;
     }
 
-    public static int dfs(ArrayList<ArrayList<String>> graph, int i, int j, String currString, String goal, int position, int[] direction) {
-        if (Objects.equals(currString, goal)) {
-            return 1;
-        }
-        if (!inBounds(i, j)) {
-            return 0;
-        }
-        if (!Objects.equals(graph.get(i).get(j), String.valueOf(goal.charAt(position)))) {
-            return 0;
-        }
-
-        int result = 0;
-        result += dfs(graph, i+direction[0], j+direction[1], currString+graph.get(i).get(j), goal, position+1, direction);
-
-        return result;
-    }
+//    public static int part2(ArrayList<ArrayList<String>> graph) {
+//        int result = 0;
+//
+//        for (int i = 0; i < graph.size(); i++) {
+//            for (int j = 0; j < graph.size(); j++) {
+//                if (Objects.equals(graph.get(i).get(j), "A") {
+//
+//                }
+//            }
+//        }
+//
+//        return result;
+//    }
 
     public static int part1(ArrayList<ArrayList<String>> graph) {
         int result = 0;
@@ -44,7 +41,25 @@ public class Day4 {
 
                 if (Objects.equals(graph.get(i).get(j), "X")) {
                     for (int[] direction: directions) {
-                        result += dfs(graph, i, j, "", "XMAS", 0, direction);
+                        int position = 0;
+                        int currI = i;
+                        int currJ = j;
+                        for (int l = 0; l < 4; l++) {
+                            if (!inBounds(currI, currJ)) {
+                                break;
+                            }
+                            if (!Objects.equals(graph.get(currI).get(currJ), String.valueOf("XMAS".charAt(position)))) {
+                                break;
+                            }
+
+                            currI += direction[0];
+                            currJ += direction[1];
+                            position++;
+                        }
+
+                        if (position == 4) {
+                            result++;
+                        }
                     }
                 }
             }
